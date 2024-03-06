@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+//import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './Signin.css'; 
 
@@ -6,6 +7,7 @@ const SigninPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signinFailed, setSigninFailed] = useState(false);
+  //const history = useHistory()
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ const SigninPage = () => {
         console.log(user)
         const response = await axios.post('http://localhost:3001/users/login', user);
         console.log('Signin successful:', response.data);
+        //navigate('/emaileditor')
         
       } catch (error) {
         console.error('Error signing up:', error);
