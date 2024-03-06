@@ -6,7 +6,6 @@ const cors = require('cors');
 
 
 const userRoutes = require('./routes/user');
-co
 
 const app = express();
 require('dotenv').config({ path: './.env' });

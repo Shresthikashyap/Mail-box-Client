@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './SignUp.css'; // Import the CSS file
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [signupSuccess, setSignupSuccess] = useState(false);
+  const [signupFailed, setSignupFailed] = useState(false);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -20,35 +23,25 @@ const SignupPage = () => {
           password,
         };
         console.log(user)
-        const response = await axios.post('https://localhost:3001/users/signup', user,{
+        const response = await axios.post('http://localhost:3001/users/signup', user,{
           headers: {
             'Content-Type': 'application/json',
           },
         });
         console.log('Signup successful:', response.data);
+        setSignupSuccess(true);
         // Handle successful signup, redirect user or show success message
       } catch (error) {
         console.error('Error signing up:', error);
-        alert('check credentials again')
+        // alert('check credentials again')
+        setSignupFailed(true);
       }
   };
 
   return (
-    <div
-      className="container-fluid"
-      style={{
-        backgroundImage: `url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjU0NmJhdGNoMy1teW50LTM0LWJhZGdld2F0ZXJjb2xvcl8xLmpwZw.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minWidth:'200px',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <div className="col-md-6">
-        <h1 className="text-center mb-4">Signup</h1>
+    <div className="container-fluid">
+      <div className="col-md-4 bg-dark text-white p-4 rounded ">
+        <h1 className="text-center mb-5">Signup</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email address</label>
@@ -83,9 +76,27 @@ const SignupPage = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block">
-            Sign Up
-          </button>
+          <div className="text-center mb-3"> {/* Center the button */}
+              <button type="submit" className="btn btn-light">
+                Sign Up
+              </button>
+          </div>
+
+          <div className='text-center mb-3'>
+          Login to <a href="/">existing </a> Account
+          </div> 
+
+          {signupSuccess && ( // Display success message if signupSuccess is true
+          <div className="alert alert-success" role="alert">
+            You have signed up successfully!
+          </div>
+        )}
+
+        {signupFailed && ( // Display success message if signupSuccess is true
+          <div className="alert alert-danger" role="alert">
+            Something went wrong!
+          </div>
+        )}
         </form>
       </div>
     </div>
