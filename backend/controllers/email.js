@@ -1,6 +1,6 @@
 const Email = require('../models/email');
 
-const addMail = async (req, res) => {
+const addEmail = async (req, res) => {
   try {
     const { content } = req.body;
 
@@ -20,23 +20,20 @@ const addMail = async (req, res) => {
 };
 
 /**************  get all expenses of database  *************/
-// const getExpenses = async(req, res) => {
+const getEmails = async(req, res) => {
   
-//     try {
-//     console.log('***** ',req.user._id) //id or _id
-//     const expenses = await Expense.find({ userId: req.user._id });
-//     //console.log(expenses) 
+    try {
+    console.log('***** ') 
     
-//     const user = await User.findOne({_id: req.user._id});
-//     //console.log('total  ',user)
-
-//     res.status(200).send({ expenses, total:user.totalExpense, success: true });
-//   } 
-//   catch (err) {
-//     console.log(err);
-//     res.status(500).json({ error: err });
-//   }
-// };
+    const emails = await Email.find();
+    
+    res.status(200).send({ emails, success: true });
+  } 
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err });
+  }
+};
 
 // /******************   download expenses **********************/
 // const downloadExpenses = async(req,res) => {
@@ -138,5 +135,5 @@ const addMail = async (req, res) => {
 // };
 
 module.exports={
-  addMail
+  addEmail, getEmails
 }

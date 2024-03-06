@@ -1,38 +1,37 @@
-.App {
+/* App.css */
+
+/* Sidebar styles */
+.sidebar-container {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f8f9fa; /* Light gray background color */
+  padding-top: 50px;
+  border-right: 1px solid #dee2e6; /* Gray border on the right side */
+}
+
+.sidebar-heading {
+  padding: 10px;
   text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #dee2e6; /* Gray border on the bottom */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.sidebar-link {
+  padding: 10px;
+  color: #495057; /* Dark gray text color */
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sidebar-link:hover {
+  background-color: #e9ecef; /* Light gray background color on hover */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Main content styles */
+.main-content {
+  margin-left: 250px; /* Adjust to match the width of the sidebar */
+  padding: 20px;
 }

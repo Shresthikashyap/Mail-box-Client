@@ -26,25 +26,36 @@ const EmailEditor = () => {
   };
 
   return (
-    <div>
-      <h1>Create Email</h1>
-      <ReactQuill
-        theme="snow"
-        value={editorHtml}
-        onChange={handleChange}
-        modules={{
-          toolbar: [
-            [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-            [{size: []}],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{'list': 'ordered'}, {'list': 'bullet'}, 
-             {'indent': '-1'}, {'indent': '+1'}],
-            ['link', 'image', 'video'],
-            ['clean']
-          ],
-        }}
-      />
-      <button onClick={handleSendEmail}>Send Email</button>
+    <div className="container">
+      
+        <h1 className='text-center mb-5'>Create Email</h1>
+      
+      
+      <div className="row">
+        <div className="col-md-12">
+          <ReactQuill
+            theme="snow"
+            value={editorHtml}
+            onChange={handleChange}
+            modules={{
+              toolbar: [
+                [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                [{size: []}],
+                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                [{'list': 'ordered'}, {'list': 'bullet'}, 
+                 {'indent': '-1'}, {'indent': '+1'}],
+                ['link', 'image', 'video'],
+                ['clean']
+              ],
+            }}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <button className="btn btn-primary btn-block" onClick={handleSendEmail}>Send Email</button>
+        </div>
+      </div>
     </div>
   );
 };
