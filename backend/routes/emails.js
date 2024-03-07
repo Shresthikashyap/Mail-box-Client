@@ -9,5 +9,6 @@ router.post('/useremails',userauthentication.authenticate,emailcontroller.addEma
 router.get('/getemails',userauthentication.authenticate,emailcontroller.getEmails);
 router.get('/fetchemail/:id',userauthentication.authenticate,emailcontroller.fetchEmail);
 router.get('/emailscount',userauthentication.authenticate,emailcontroller.readEmails);
+router.get('/deleteemail/:id',userauthentication.authenticate,emailcontroller.deleteEmail);
 
 module.exports = router;

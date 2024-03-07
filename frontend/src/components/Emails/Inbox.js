@@ -17,7 +17,7 @@ function Inbox() {
             Authorization: token
           }
         });
-       
+
         setEmails(response.data.emails);
 
       } catch (error) {
@@ -26,6 +26,7 @@ function Inbox() {
     };
     fetchEmails();
   }, [token]);
+
 
   return (
     <Card>
@@ -36,12 +37,11 @@ function Inbox() {
             <Link to={`/email/${email._id}`} key={email._id} className="list-group-item">
               <li>
                 {email.isRead ? (
-                  // Render message content without blue dot for read emails
                   <div> {email.content.replace(/<[^>]*>?/gm, '')}</div>
                 ) : (
-                  // Render message content with blue dot for unread emails
                   <div><span className="blue-dot"></span> { email.content.replace(/<[^>]*>?/gm, '')}</div>
                 )}
+          
               </li>
             </Link>
           ))}

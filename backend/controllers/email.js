@@ -141,44 +141,27 @@ catch (err) {
 // }
 
 // /***************     delete the expenses  ******************/
-// const deleteExpense = async(req, res) => {
+const deleteEmail = async(req, res) => {
 
-//   try {
-   
-//     const expenseId = req.params.id;
-//     //const {cost} = req.body; 
-//    console.log('******** ',expenseId)
-//     if (expenseId=='undefined') {
-//       console.log('ID is missing');
-//       return res.status(400).json({ err: 'Id is missing' });
-//     }
-
-//     const expense = await Expense.findById(expenseId);
-//     console.log('***********',expense.amount);
-   
-//     if (!expense) {  
-//       return res.status(404).json({ err: 'Expense not found' });  
-//     }  
-    
-//     const deletedExpense = await Expense.deleteOne({_id: expenseId});
-//     console.log(deletedExpense);
-    
-//     const totalExpense = Number(req.user.totalExpense) - Number(expense.amount);
-    
-//     if(totalExpense<0){
-//       await User.findOneAndUpdate({_id: req.user._id},{totalExpense:0});
-//     }else{
-//       await User.findOneAndUpdate({_id: req.user._id},{totalExpense:totalExpense});
-//     }
-
-//     res.status(200).json({total:totalExpense, success:true });
-//   } 
-//   catch (err) {
+  try {
+   console.log('******** ',req.params.id)
+    const id = req.params.id;
   
-//     res.status(500).json({ error: err });
-//   }
-// };
+   
+    // if (id=='undefined') {
+    //   return res.status(400).json({ err: 'Id is missing' });
+    // }
+    
+    await Email.deleteOne({_id: id});
+
+    res.status(200).json({ success:true });
+  } 
+  catch (err) {
+  
+    res.status(500).json({ error: err });
+  }
+};
 
 module.exports={
-  addEmail, getEmails, fetchEmail, readEmails
+  addEmail, getEmails, fetchEmail, readEmails, deleteEmail
 }
