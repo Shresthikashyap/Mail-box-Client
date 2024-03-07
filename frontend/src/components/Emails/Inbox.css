@@ -1,0 +1,12 @@
+.list-group-item {
+    list-style: none; /* Remove bullets/dots */
+  }
+
+  .blue-dot{
+    width: 10px;
+    height: 10px;
+    background-color: rgba(6, 151, 235, 0.826);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  

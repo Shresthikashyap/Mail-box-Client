@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-//import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../../store/AuthSlice';
 import axios from 'axios';
 import './Signin.css'; 
 
@@ -7,7 +9,8 @@ const SigninPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signinFailed, setSigninFailed] = useState(false);
-  //const history = useHistory()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -20,7 +23,9 @@ const SigninPage = () => {
         console.log(user)
         const response = await axios.post('http://localhost:3001/users/login', user);
         console.log('Signin successful:', response.data);
-        //navigate('/emaileditor')
+        const token = response.data.token;
+        dispatch(loginSuccess({ token }));
+        navigate('/inbox')
         
       } catch (error) {
         console.error('Error signing up:', error);

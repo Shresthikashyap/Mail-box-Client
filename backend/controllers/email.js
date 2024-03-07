@@ -6,7 +6,9 @@ const addEmail = async (req, res) => {
 
     // Create a new Email document
     const email = new Email({
-      content
+      content,
+      isRead:false,
+      userId:req.user.id
     });
 
     // Save the email to the database
@@ -25,7 +27,7 @@ const getEmails = async(req, res) => {
     try {
     console.log('***** ') 
     
-    const emails = await Email.find();
+    const emails = await Email.find({userId:req.user.id});
     
     res.status(200).send({ emails, success: true });
   } 
@@ -33,6 +35,49 @@ const getEmails = async(req, res) => {
     console.log(err);
     res.status(500).json({ error: err });
   }
+};
+
+const fetchEmail = async(req, res) => {
+  
+  try {
+  console.log('*****yo ',req.params.id) 
+  const id= req.params.id
+  const email = await Email.findOne({_id:id});
+
+  if (!email) {
+    return res.status(404).json({ success: false, message: 'Email not found' });
+  }
+
+  email.isRead = true;
+  await email.save();
+
+  
+  
+  res.status(200).send({ email, success: true });
+} 
+catch (err) {
+  console.log(err);
+  res.status(500).json({ error: err });
+}
+};
+
+const readEmails = async(req, res) => {
+  console.log('here')
+  try {
+  console.log('*****yo ',req.user.id) 
+  const id= req.user.id
+
+  const emails = await Email.find({ userId: id, isRead: false });
+  
+  const count = emails.length;
+  console.log('count ',count)
+  
+  res.status(200).send({ count, success: true });
+} 
+catch (err) {
+  console.log(err);
+  res.status(500).json({ error: err });
+}
 };
 
 // /******************   download expenses **********************/
@@ -135,5 +180,5 @@ const getEmails = async(req, res) => {
 // };
 
 module.exports={
-  addEmail, getEmails
+  addEmail, getEmails, fetchEmail, readEmails
 }

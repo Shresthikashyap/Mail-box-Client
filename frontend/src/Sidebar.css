@@ -1,29 +1,29 @@
-.sidebar-container {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #f8f9fa; /* Light gray background color */
-    padding-top: 50px;
-    border-right: 1px solid #dee2e6; /* Gray border on the right side */
-  }
-  
-  .sidebar-heading {
-    padding: 10px;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border-bottom: 1px solid #dee2e6; /* Gray border on the bottom */
-  }
-  
-  .sidebar-link {
-    padding: 10px;
-    color: #495057; /* Dark gray text color */
-    text-decoration: none;
-  }
-  
-  .sidebar-link:hover {
-    background-color: #e9ecef; /* Light gray background color on hover */
-  }
-  
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 250px; /* Adjust width as needed */
+  height: 100vh; /* Set sidebar height to full viewport height */
+  background-color: #f8f9fa; /* Light gray background color */
+}
+
+.sidebar-heading {
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #dee2e6; /* Gray border on the bottom */
+}
+
+.flex-column {
+  flex: 1; /* Fill remaining space with flexbox */
+}
+
+.sidebar-link {
+  padding: 10px;
+  color: #495057; /* Dark gray text color */
+  text-decoration: none;
+}
+
+.sidebar-link:hover {
+  background-color: #e9ecef; /* Light gray background color on hover */
+}

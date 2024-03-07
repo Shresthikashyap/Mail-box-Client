@@ -1,33 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Card from '../UI/Card';
+import { Link } from 'react-router-dom';
+import {  useSelector } from 'react-redux';
+import './Inbox.css';
 
 function Inbox() {
   const [emails, setEmails] = useState([]);
+  const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    fetchEmails();
-  }, []);
+    const fetchEmails = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/emails/getemails', {
+          headers: {
+            Authorization: token
+          }
+        });
+       
+        setEmails(response.data.emails);
 
-  const fetchEmails = async () => {
-    try {
-      const response = await axios.get('http://localhost:3001/emails/getemails');
-      setEmails(response.data.emails);
-    } catch (error) {
-      console.error('Error fetching emails:', error);
-    }
-  };
+      } catch (error) {
+        console.error('Error fetching emails:', error);
+      }
+    };
+    fetchEmails();
+  }, [token]);
 
   return (
-    <div>
-      <h1>Inbox</h1>
-      <div className="email-list">
-        {emails.map((email) => (
-          <div key={email._id} className="email-item">
-            <div dangerouslySetInnerHTML={{ __html: email.content }} />
-          </div>
-        ))}
+    <Card>
+      <div>
+        <h1>Inbox</h1>
+        <ul className="list-group">
+          {emails.map((email) => (
+            <Link to={`/email/${email._id}`} key={email._id} className="list-group-item">
+              <li>
+                {email.isRead ? (
+                  // Render message content without blue dot for read emails
+                  <div> {email.content.replace(/<[^>]*>?/gm, '')}</div>
+                ) : (
+                  // Render message content with blue dot for unread emails
+                  <div><span className="blue-dot"></span> { email.content.replace(/<[^>]*>?/gm, '')}</div>
+                )}
+              </li>
+            </Link>
+          ))}
+        </ul>
       </div>
-    </div>
+    </Card>
   );
 }
 
