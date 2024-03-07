@@ -2,10 +2,12 @@ const Email = require('../models/email');
 
 const addEmail = async (req, res) => {
   try {
+    console.log(req.body)
     const { content } = req.body;
 
     // Create a new Email document
     const email = new Email({
+      receiver:req.body.to,
       content,
       isRead:false,
       userId:req.user.id
@@ -25,16 +27,33 @@ const addEmail = async (req, res) => {
 const getEmails = async(req, res) => {
   
     try {
-    console.log('***** ') 
+    console.log('***** ',req.user) 
     
-    const emails = await Email.find({userId:req.user.id});
-    
+    const userSender = await Email.find({userId:req.user.id});
+    const userReceiver = await Email.find({receiver:req.user.email});
+
+    const emails = [...userReceiver, ...userSender];
     res.status(200).send({ emails, success: true });
   } 
   catch (err) {
     console.log(err);
     res.status(500).json({ error: err });
   }
+};
+
+const sentEmails = async(req, res) => {
+  
+  try {
+  console.log('***** ',req.user) 
+  
+  const emails = await Email.find({userId:req.user.id});
+  
+  res.status(200).send({ emails, success: true });
+} 
+catch (err) {
+  console.log(err);
+  res.status(500).json({ error: err });
+}
 };
 
 const fetchEmail = async(req, res) => {
@@ -64,10 +83,10 @@ catch (err) {
 const readEmails = async(req, res) => {
   console.log('here')
   try {
-  console.log('*****yo ',req.user.id) 
-  const id= req.user.id
+  console.log('*****yo ',req.user) 
+  //const id= req.user.id
 
-  const emails = await Email.find({ userId: id, isRead: false });
+  const emails = await Email.find({ receiver: req.user.email, isRead: false });
   
   const count = emails.length;
   console.log('count ',count)
@@ -80,67 +99,6 @@ catch (err) {
 }
 };
 
-// /******************   download expenses **********************/
-// const downloadExpenses = async(req,res) => {
-//   try{
-    
-//     console.log('****************',req.user._id)
-//     //const expenses = await UserServices.getExpenses(req);
-//     const expenses = await Expense.find({userId:req.user._id})
-     
-//     console.log('****************',expenses)
-//     const stringifiedExpenses = JSON.stringify(expenses);
-
-//     const userId = req.user._id;
-
-//     const fileName = `Expense${userId}/${new Date()}.txt`;   
-
-//     const fileUrl = await S3Service.uploadToS3(stringifiedExpenses, fileName);
-    
-//     const file = new downloadedFile({ url: fileUrl, userId: userId});
-//     file.save();
-
-//     res.status(200).json({fileUrl, success: true});
-//   }
-//   catch(err){
-//     res.status(500).json({fileUrl:'',success:false,err:err})
-//   } 
-// }
-
-// /************Update expense *************/
-// const updateExpense = async(req,res) =>{
-  
-//   try {
-
-//     let userId = req.params.id;
-//     if (userId == 'undefined'){
-//       return res.status(400).json({ err: 'Id is missing' });
-//     }
-
-//     const expense = await Expense.findById(userId);
-//     console.log('expense id ',expense._id);
-//     const {amount, description, category } = req.body; 
-//     console.log('body*************', req.body)
-    
-//     const updatedTotal = Number(req.user.totalExpense) - Number(expense.amount);
-//     const total = Number(updatedTotal) + Number(amount);
-//     if(total<0){
-//       await User.findOneAndUpdate({_id: req.user._id},{totalExpense:0});
-//     }else{
-//       await User.findOneAndUpdate({_id: req.user._id},{totalExpense:total});
-//     }
-
-//     const updatedExpenseDetail = await Expense.findOneAndUpdate({_id: expense._id},{ amount:amount, description:description, category:category},{ new: true }); 
-
-//     console.log('****************** update ',updatedExpenseDetail)
-//     res.status(201).json({ expense : updatedExpenseDetail,total: total});
-
-//   } catch (err) {
-//     res.status(500).json({ error: err });
-//   }
-// }
-
-// /***************     delete the expenses  ******************/
 const deleteEmail = async(req, res) => {
 
   try {
@@ -163,5 +121,5 @@ const deleteEmail = async(req, res) => {
 };
 
 module.exports={
-  addEmail, getEmails, fetchEmail, readEmails, deleteEmail
+  addEmail, getEmails, fetchEmail, readEmails, sentEmails, deleteEmail
 }
