@@ -6,6 +6,7 @@ import SigninPage from './components/Auth/Signin';
 import EmailEditor from './components/EmailEditor/EmailEditor';
 import Inbox from './components/Emails/Inbox';
 import Email from './components/Emails/Email';
+import SentEmails from './components/Emails/Sent'
 import Sidebar from './Sidebar';
 import { useSelector } from 'react-redux';
 import './App.css'; // Import the CSS file
@@ -28,6 +29,7 @@ function App() {
             <Route path="/compose" element={<EmailEditor/>} />
             <Route path="/inbox" element={<Inbox/>} />
             <Route exact path="/email/:id" element={<Email/>} />
+            <Route exact path="/sent" element={<SentEmails/>} />
           </Routes>
         </div>
       </div>

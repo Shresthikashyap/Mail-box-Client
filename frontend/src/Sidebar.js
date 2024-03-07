@@ -25,7 +25,10 @@ function Sidebar() {
           </Nav.Item>
           <Nav.Item >
             <Nav.Link as={Link} to={'/inbox'} className="sidebar-link">Inbox ({count})</Nav.Link>
-          </Nav.Item>          
+          </Nav.Item>   
+          <Nav.Item >
+            <Nav.Link as={Link} to={'/sent'} className="sidebar-link">Sent</Nav.Link>
+          </Nav.Item>        
       </Nav>
     </nav>
   );
