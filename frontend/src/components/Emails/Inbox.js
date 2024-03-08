@@ -21,6 +21,7 @@ function Inbox() {
   const dispatch = useDispatch();
   const token = useSelector(state => state.auth.token);
   const decodedToken = parseJwt(token)
+  console.log(decodedToken);
 
   useEffect(() => {
     const fetchEmails = async () => {
@@ -40,31 +41,27 @@ function Inbox() {
       }
     };
     fetchEmails();
-    const intervalId = setInterval(fetchEmails, 2000);
+    //const intervalId = setInterval(fetchEmails, 2000);
 
     // Cleanup function to clear the interval when component unmounts
-    return () => clearInterval(intervalId);
+    //return () => clearInterval(intervalId);
   }, [token,dispatch]);
 
 
   return (
     <Card>
-      <div>
-        <h1>Inbox</h1>
+      <div className='icontainer-inbox'>
+        <h1 className="text-center mb-5">Inbox</h1>
         <ul className="list-group">
           {emails.map((email) => (
             <Link to={`/email/${email._id}`} key={email._id} className="list-group-item">
               <li>
-                {console.log(email.isRead , email.receiver,email.content)}
-                {decodedToken.email === email.receiver ? (
+                
+              {(decodedToken._id !== email.userId && email.isRead === false) ? (
+                  <div><span className="blue-dot"></span> {email.content.replace(/<[^>]*>?/gm, '')}</div> 
+               ) : (
                   <div> {email.content.replace(/<[^>]*>?/gm, '')}</div>
-                ) : (
-                  email.isRead === false ? (
-                    <div><span className="blue-dot"></span> {email.content.replace(/<[^>]*>?/gm, '')}</div>
-                  ) : (
-                    <div> {email.content.replace(/<[^>]*>?/gm, '')}</div>
-                  )
-                )}
+               )}
           
               </li>
             </Link>

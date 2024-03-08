@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmailCount } from '../../store/UnreadEmailSlice';
+import Card from '../UI/Card';
 
 const EmailDetails = () => {
   const { id } = useParams();
@@ -27,9 +28,9 @@ const EmailDetails = () => {
         dispatch(fetchEmailCount(token));
 
       } catch (error) {
-        setError(error); // Set error state with the entire error object
+        setError(error); 
       } finally {
-        setLoading(false); // Set loading state to false regardless of success or failure
+        setLoading(false); 
       }
     };
 
@@ -59,17 +60,16 @@ const EmailDetails = () => {
      
     } catch (error) {
       console.error('Error deleting email:', error);
-      // Handle error (e.g., show error message to the user)
     }
   };
 
   return (
-    <div>
+    <Card>
       <div dangerouslySetInnerHTML={{ __html: email.content }} />
       <div className='delete-mail'>
-          <button type='submit' onClick={() => handleDeleteMail(email._id)}>Delete</button>
+          <button type='submit' className="btn btn-primary" onClick={() => handleDeleteMail(email._id)}>Delete Mail</button>
     </div>
-    </div>
+    </Card>
   );
 };
 

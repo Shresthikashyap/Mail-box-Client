@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmailCount } from '../../store/UnreadEmailSlice';
 import Card from '../UI/Card';
+import './EmailEditor.css'
 
 const EmailEditor = () => {
   const [editorHtml, setEditorHtml] = useState('');
@@ -18,7 +19,7 @@ const EmailEditor = () => {
 
   const handleSendEmail = async () => {
     try {
-      // Make API request to backend
+      
       const response = await axios.post(
         'http://localhost:3001/emails/useremails',
         { to, content: editorHtml },
@@ -32,17 +33,16 @@ const EmailEditor = () => {
       console.log('Email sent:', response.data);
       dispatch(fetchEmailCount(token));
       alert('Email sent successfully');
-      // Handle success or display a message to the user
+      
     } catch (error) {
       console.error('Error sending email:', error);
-      // Handle error or display an error message to the user
     }
   };
 
   return (
     <Card>
       <h1 className="text-center mb-5">Create Email</h1>
-      <div className="container" style={{ marginLeft: '170px' }}>
+      <div className="container" >
         <div className="row">
           <div className="col-md-7 mb-3">
             <input
@@ -56,8 +56,7 @@ const EmailEditor = () => {
         </div>
   
         <div className="row">
-          <div className="col-md-9">
-          <div className="col-md-9" style={{ height: '400px' }}>
+          <div className="col-md-9" >
             <ReactQuill
               theme="snow"
               value={editorHtml}
@@ -78,17 +77,15 @@ const EmailEditor = () => {
                 ]
               }}
             />
-          </div>
+          
           </div>
         </div>
        
-        <div className="row">
-          <div className="col-md-12">
-            <button className="btn btn-primary btn-block" onClick={handleSendEmail} >
-              Send Email
+        
+            <button className="btn btn-primary" onClick={handleSendEmail}>
+            Send Email
             </button>
-          </div>
-        </div>
+          
       
       </div>
     </Card>

@@ -31,7 +31,7 @@ function Sent() {
   return (
     <Card>
       <div>
-        <h1>Sent</h1>
+        <h1 className="text-center mb-5">Sent</h1>
         <ul className="list-group">
           {emails.map((email) => (
             <Link to={`/email/${email._id}`} key={email._id} className="list-group-item">

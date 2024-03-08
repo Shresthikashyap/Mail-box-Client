@@ -1,29 +1,30 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 250px; /* Adjust width as needed */
-  height: 100vh; /* Set sidebar height to full viewport height */
-  background-color: #f8f9fa; /* Light gray background color */
+  width: 250px; 
+  height: 100vh; 
+  background-color: #62676c49; /* Light gray background color */
 }
 
 .sidebar-heading {
-  padding: 10px;
+  padding: 10%;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   font-weight: bold;
   border-bottom: 1px solid #dee2e6; /* Gray border on the bottom */
 }
 
 .flex-column {
-  flex: 1; /* Fill remaining space with flexbox */
+  font-size: 1.3rem;
+  text-align: center;
 }
 
 .sidebar-link {
   padding: 10px;
-  color: #495057; /* Dark gray text color */
+  color: #2c3034; /* Dark gray text color */
   text-decoration: none;
 }
 
 .sidebar-link:hover {
-  background-color: #e9ecef; /* Light gray background color on hover */
+  background-color: #e9ecefce; /* Light gray background color on hover */
 }

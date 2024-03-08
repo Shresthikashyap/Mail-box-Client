@@ -1,4 +1,6 @@
-.main-content {
+.card{
    /*  margin-left: 250px; Adjust to match the width of the sidebar*/ 
     /* padding-top: 20px !important; */
+    margin: 5%;
+    border: 0px solid black;
   }

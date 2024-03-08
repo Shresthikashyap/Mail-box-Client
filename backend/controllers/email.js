@@ -23,7 +23,6 @@ const addEmail = async (req, res) => {
   }
 };
 
-/**************  get all expenses of database  *************/
 const getEmails = async(req, res) => {
   
     try {
@@ -62,15 +61,16 @@ const fetchEmail = async(req, res) => {
   console.log('*****yo ',req.params.id) 
   const id= req.params.id
   const email = await Email.findOne({_id:id});
-
+  console.log(req.user.id ,' ', req.params.id)
   if (!email) {
     return res.status(404).json({ success: false, message: 'Email not found' });
   }
-
-  email.isRead = true;
-  await email.save();
-
   
+   //only save to true when the receiver opens the mail
+  if(req.user.id !== email.userId.toString()){
+      email.isRead = true;
+      await email.save();
+  }
   
   res.status(200).send({ email, success: true });
 } 
