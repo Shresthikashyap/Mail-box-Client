@@ -12,7 +12,7 @@ function Sent() {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/emails/sentemails', {
+        const response = await axios.get('https://mail-box-client-c2vn.onrender.com/emails/sentemails', {
           headers: {
             Authorization: token
           }
