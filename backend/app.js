@@ -15,7 +15,7 @@ require('dotenv').config({ path: './.env' });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(cors({ origin: 'http://localhost:3000' })); 
+app.use(cors({ origin: '*' })); 
 
 app.use('/users',userRoutes)
 app.use('/emails',emailRoutes)
