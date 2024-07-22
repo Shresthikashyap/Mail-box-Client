@@ -30,7 +30,7 @@ function Sent() {
 
   return (
     <Card>
-      <div>
+      <div className='card'>
         <h1 className="text-center mb-5">Sent</h1>
         <ul className="list-group">
           {emails.map((email) => (

@@ -50,7 +50,7 @@ function Inbox() {
 
   return (
     <Card>
-      <div className='icontainer-inbox'>
+      <div className='card'>
         <h1 className="text-center mb-5">Inbox</h1>
         <ul className="list-group">
           {emails.map((email) => (

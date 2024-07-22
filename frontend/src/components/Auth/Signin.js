@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../store/AuthSlice';
 import axios from 'axios';
-import './Signin.css'; 
+import './Signin.css';
 
 const SigninPage = () => {
   const [email, setEmail] = useState('');
@@ -12,26 +12,27 @@ const SigninPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (email === '' || password === '') {
+      setSigninFailed(false);
+    }
+  }, [email, password]);
+
   const handleSubmit = async(e) => {
     e.preventDefault();
-  
-      try {
-        const user = {
-          email,
-          password,
-        };
-        console.log(user)
-        const response = await axios.post('http://localhost:3001/users/login', user);
-        console.log('Signin successful:', response.data);
-        const token = response.data.token;
-        dispatch(loginSuccess({ token }));
-        navigate('/inbox')
-        
-      } catch (error) {
-        console.error('Error signing up:', error);
-        // alert('check credentials again')
-        setSigninFailed(true);
-      }
+    
+    try {
+      const user = { email, password };
+      console.log(user);
+      const response = await axios.post('http://localhost:3001/users/login', user);
+      console.log('Signin successful:', response.data);
+      const token = response.data.token;
+      dispatch(loginSuccess({ token }));
+      navigate('/inbox');
+    } catch (error) {
+      console.error('Error signing up:', error);
+      setSigninFailed(true);
+    }
   };
 
   return (
@@ -41,37 +42,43 @@ const SigninPage = () => {
         <form onSubmit={handleSubmit}>
           <div className='form-group '>
             <label>Email:</label>
-            <input type="email"
-            className='form-control'
-            placeholder="Enter Email"
-            onChange={(e)=> setEmail(e.target.value)}/>
+            <input 
+              type="email"
+              className='form-control'
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
-
+          
           <div className='form-group '>
             <label>Password:</label>
-            <input type="password"
-            className='form-control'
-            placeholder="Enter Password"
-            onChange={(e)=> setPassword(e.target.value)}/>
-          </div>  
-
+            <input 
+              type="password"
+              className='form-control'
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          
           <div className='text-center mb-3'>
-            <button type='submit' className='btn btn-light'> Sign In</button>
-          </div> 
-
+            <button type='submit' className='btn btn-light'>Sign In</button>
+          </div>
+          
           <div className='text-center mb-3'>
             <a href="/forgot-password">Forgot Password</a>
-          </div>    
-
+          </div>
+          
           <div className='text-center mb-3'>
-           Create a <a href="/signup">new </a> Account
-          </div>      
-
-          {signinFailed && (
+            Create a <a href="/signup">new</a> Account
+          </div>
+          
+          {signinFailed && email && password && (
             <div className='alert alert-danger' role='alert'>
               Something went wrong
             </div>
-          )}     
+          )}
         </form>
       </div>
     </div>

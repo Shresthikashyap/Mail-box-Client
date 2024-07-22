@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SignUp.css'; // Import the CSS file
 
@@ -8,6 +8,12 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
   const [signupFailed, setSignupFailed] = useState(false);
+
+  useEffect(() => {
+    if (email === '' || password === '') {
+      setSignupFailed(false);
+    }
+  }, [email, password]);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -86,13 +92,13 @@ const SignupPage = () => {
           Login to <a href="/">existing </a> Account
           </div> 
 
-          {signupSuccess && ( // Display success message if signupSuccess is true
+          {signupSuccess && !signupFailed && ( // Display success message if signupSuccess is true
           <div className="alert alert-success" role="alert">
             You have signed up successfully!
           </div>
         )}
 
-        {signupFailed && ( // Display success message if signupSuccess is true
+        {signupFailed  && ( // Display success message if signupSuccess is true
           <div className="alert alert-danger" role="alert">
             Something went wrong!
           </div>
