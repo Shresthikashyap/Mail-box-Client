@@ -17,7 +17,7 @@ const EmailDetails = () => {
   useEffect(() => {
     const fetchEmailContent = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/emails/fetchemail/${id}`, {
+        const response = await axios.get(`https://mail-box-client-c2vn.onrender.com/emails/fetchemail/${id}`, {
           headers: {
             "Authorization": token
           }
@@ -49,7 +49,7 @@ const EmailDetails = () => {
     try {
       console.log('jjjjjj ',email._id)
       const id = email._id;
-      await axios.delete(`http://localhost:3001/emails/deleteemail/${id}`, {
+      await axios.delete(`https://mail-box-client-c2vn.onrender.com/emails/deleteemail/${id}`, {
         headers: {
           "Authorization": token
         }

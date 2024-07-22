@@ -20,6 +20,7 @@ const SigninPage = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+<<<<<<< HEAD
     
     try {
       const user = { email, password };
@@ -33,6 +34,26 @@ const SigninPage = () => {
       console.error('Error signing up:', error);
       setSigninFailed(true);
     }
+=======
+  
+      try {
+        const user = {
+          email,
+          password,
+        };
+        console.log(user)
+        const response = await axios.post('https://mail-box-client-c2vn.onrender.com/users/login', user);
+        console.log('Signin successful:', response.data);
+        const token = response.data.token;
+        dispatch(loginSuccess({ token }));
+        navigate('/inbox')
+        
+      } catch (error) {
+        console.error('Error signing up:', error);
+        // alert('check credentials again')
+        setSigninFailed(true);
+      }
+>>>>>>> fd5db59d5468fd3ec0957957b883e7f79956eda6
   };
 
   return (
