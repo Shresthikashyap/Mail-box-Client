@@ -6,6 +6,7 @@ import SigninPage from './components/Auth/Signin';
 import EmailEditor from './components/EmailEditor/EmailEditor';
 import Inbox from './components/Emails/Inbox';
 import Email from './components/Emails/Email';
+import ForgetPassword from './components/Auth/ForgetPassword';
 import SentEmails from './components/Emails/Sent'
 import Sidebar from './Sidebar';
 import { useSelector } from 'react-redux';
@@ -30,6 +31,7 @@ function App() {
             <Route path="/inbox" element={<Inbox/>} />
             <Route exact path="/email/:id" element={<Email/>} />
             <Route exact path="/sent" element={<SentEmails/>} />
+            <Route path="/forgetpassword" element={<ForgetPassword />} />
           </Routes>
         </div>
       </div>

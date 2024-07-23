@@ -21,7 +21,7 @@ const EmailEditor = () => {
     try {
       
       const response = await axios.post(
-        'https://mail-box-client-c2vn.onrender.com/emails/useremails',
+        'http://localhost:3001/emails/useremails',
         { to, content: editorHtml },
         {
           headers: {
@@ -41,7 +41,7 @@ const EmailEditor = () => {
 
   return (
     <Card>
-      <h1 className="text-center mb-5">Create Email</h1>
+      <h1 className="heading">Create Email</h1>
       <div className="container" >
         <div className="row">
           <div className="col-md-7 mb-3">

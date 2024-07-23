@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './SignUp.css'; // Import the CSS file
+import classes from './SignUp.module.css'; // Import the CSS file
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +29,7 @@ const SignupPage = () => {
           password,
         };
         console.log(user)
-        const response = await axios.post('https://mail-box-client-c2vn.onrender.com/users/signup', user,{
+        const response = await axios.post('http://localhost:3001/users/signup', user,{
           headers: {
             'Content-Type': 'application/json',
           },
@@ -45,11 +45,11 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className={classes.container_fluid}>
       <div className="col-md-4 bg-dark text-white p-4 rounded ">
-        <h1 className="text-center mb-5">Signup</h1>
+        <h1 className={classes.heading}>Signup</h1>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className={classes.form_group}>
             <label>Email address</label>
             <input
               type="email"
@@ -60,7 +60,7 @@ const SignupPage = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className={classes.form_group}>
             <label>Password</label>
             <input
               type="password"
@@ -71,7 +71,7 @@ const SignupPage = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className={classes.form_group}>
             <label>Confirm Password</label>
             <input
               type="password"

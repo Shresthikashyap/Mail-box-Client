@@ -12,11 +12,12 @@ function Sent() {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await axios.get('https://mail-box-client-c2vn.onrender.com/emails/sentemails', {
+        const response = await axios.get('http://localhost:3001/emails/sentemails', {
           headers: {
             Authorization: token
           }
         });
+        console.log(response.data)
 
         setEmails(response.data.emails);
 
@@ -31,7 +32,7 @@ function Sent() {
   return (
     <Card>
       <div className='card'>
-        <h1 className="text-center mb-5">Sent</h1>
+      <h1 className="heading">Sent</h1>
         <ul className="list-group">
           {emails.map((email) => (
             <Link to={`/email/${email._id}`} key={email._id} className="list-group-item">
@@ -43,6 +44,10 @@ function Sent() {
             </Link>
           ))}
         </ul>
+
+        {emails.length===0 && 
+              <p style={{ color: '#000000', fontSize: '1.5rem', fontWeight: 700 , textAlign: 'center' , paddingTop: '9px'}}>No emails</p>}    
+
       </div>
     </Card>
   );

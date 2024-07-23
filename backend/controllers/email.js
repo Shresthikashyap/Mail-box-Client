@@ -7,6 +7,7 @@ const addEmail = async (req, res) => {
 
     // Create a new Email document
     const email = new Email({
+      sender:req.user.email,
       receiver:req.body.to,
       content,
       isRead:false,

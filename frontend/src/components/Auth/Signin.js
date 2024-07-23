@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../store/AuthSlice';
 import axios from 'axios';
-import './Signin.css';
+import classes from './Signin.module.css';
 
 const SigninPage = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ const SigninPage = () => {
     try {
       const user = { email, password };
       console.log(user);
-      const response = await axios.post('https://mail-box-client-c2vn.onrender.com/users/login', user);
+      const response = await axios.post('http://localhost:3001/users/login', user);
       console.log('Signin successful:', response.data);
       const token = response.data.token;
       dispatch(loginSuccess({ token }));
@@ -40,7 +40,7 @@ const SigninPage = () => {
           password,
         };
         console.log(user)
-        const response = await axios.post('https://mail-box-client-c2vn.onrender.com/users/login', user);
+        const response = await axios.post('http://localhost:3001/users/login', user);
         console.log('Signin successful:', response.data);
         const token = response.data.token;
         dispatch(loginSuccess({ token }));
@@ -54,12 +54,16 @@ const SigninPage = () => {
 
   };
 
+  // const forgetPasswordHandler = () => {
+  //   navigate('/forgetpassword');
+  // }
+
   return (
-    <div className="container-fluid">
+    <div className={classes.container_fluid}>
       <div className="col-md-4 bg-dark text-white p-4 rounded">
-        <h1 className='text-center mb-5'>Login</h1>
+        <h1 className={classes.heading}>Login</h1>
         <form onSubmit={handleSubmit}>
-          <div className='form-group '>
+          <div className={classes.form_group}>
             <label>Email:</label>
             <input 
               type="email"
@@ -70,7 +74,7 @@ const SigninPage = () => {
             />
           </div>
           
-          <div className='form-group '>
+          <div className={classes.form_group}>
             <label>Password:</label>
             <input 
               type="password"
@@ -86,7 +90,7 @@ const SigninPage = () => {
           </div>
           
           <div className='text-center mb-3'>
-            <a href="/forgot-password">Forgot Password</a>
+            <a href="/forgetpassword" >Forgot Password</a>
           </div>
           
           <div className='text-center mb-3'>
