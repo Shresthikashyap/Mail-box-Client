@@ -21,7 +21,7 @@ const EmailEditor = () => {
     try {
       
       const response = await axios.post(
-        'http://localhost:3001/emails/useremails',
+        'https://mail-box-client-backend.onrender.com/emails/useremails',
         { to, content: editorHtml },
         {
           headers: {

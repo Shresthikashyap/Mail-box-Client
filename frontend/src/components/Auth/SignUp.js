@@ -29,7 +29,7 @@ const SignupPage = () => {
           password,
         };
         console.log(user)
-        const response = await axios.post('http://localhost:3001/users/signup', user,{
+        const response = await axios.post('https://mail-box-client-backend.onrender.com/users/signup', user,{
           headers: {
             'Content-Type': 'application/json',
           },

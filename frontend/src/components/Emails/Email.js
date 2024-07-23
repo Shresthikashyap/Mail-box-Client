@@ -18,7 +18,7 @@ const EmailDetails = () => {
   useEffect(() => {
     const fetchEmailContent = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/emails/fetchemail/${id}`, {
+        const response = await axios.get(`https://mail-box-client-backend.onrender.com/emails/fetchemail/${id}`, {
           headers: {
             "Authorization": token
           }
@@ -40,7 +40,7 @@ const EmailDetails = () => {
   const handleDeleteMail = async (emailId) => {
     if (window.confirm('Are you sure you want to delete this email?')) {
       try {
-        await axios.delete(`http://localhost:3001/emails/deleteemail/${emailId}`, {
+        await axios.delete(`https://mail-box-client-backend.onrender.com/emails/deleteemail/${emailId}`, {
           headers: {
             "Authorization": token
           }

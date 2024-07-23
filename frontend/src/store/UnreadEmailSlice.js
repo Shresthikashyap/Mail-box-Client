@@ -5,7 +5,7 @@ export const fetchEmailCount = createAsyncThunk(
   'emails/fetchEmailCount',
   async (token) => {
     try {
-      const response = await axios.get('http://localhost:3001/emails/emailscount', {
+      const response = await axios.get('https://mail-box-client-backend.onrender.com/emails/emailscount', {
         headers: {
           "Authorization": token
         }

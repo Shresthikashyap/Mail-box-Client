@@ -26,7 +26,7 @@ function Inbox() {
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/emails/getemails', {
+        const response = await axios.get('https://mail-box-client-backend.onrender.com/emails/getemails', {
           headers: {
             Authorization: token
           }
